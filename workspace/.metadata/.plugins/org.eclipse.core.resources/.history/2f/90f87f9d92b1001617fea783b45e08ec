@@ -3,25 +3,8 @@ package fr.pizzeria.console;
 import java.util.Locale;
 import java.util.Scanner;
 
-import fr.pizzeria.model.Pizza;
-
 public class PizzeriaAdminConsoleApp {
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-
-		Pizza [] pizzas={
-				new Pizza(0,"PEP" ,"PÈpÈroni", 12.50),
-				new Pizza(1, "MAR" ,"Margherita", 14.00),
-				new Pizza(2, "REI" ,"Reine", 11.50),
-				new Pizza(3, "FRO" ,"La 4 fromages", 12.00),
-				new Pizza(4, "CAN" ,"La cannibale", 12.50),
-				new Pizza(5, "SAV" ,"La Savoyage", 13.00),
-				new Pizza(6, "ORI" ,"L' orientale", 15.50),
-				new Pizza(7, "IND" ,"L'indienne", 14.00)};
-=======
 
 
 	public static void main(String[] args) {
@@ -36,7 +19,6 @@ public class PizzeriaAdminConsoleApp {
 				{"ORI" ,"L' orientale" ,"(13.50Ä)"},
 				{"IND" ,"L'indienne" ,"(14.00Ä)"}};
 
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 		//affichage du menu
 		afficheMenu(pizzas);
 
@@ -46,7 +28,7 @@ public class PizzeriaAdminConsoleApp {
 	 * Cette methode affiche le menu
 	 * @param tab
 	 */
-	public static void afficheMenu(Pizza[]tab){
+	public static void afficheMenu(String [][]tab){
 
 
 		System.out.println("***** Pizzeria Administration *****\n"+
@@ -70,11 +52,11 @@ public class PizzeriaAdminConsoleApp {
 	 * @param choix
 	 * @param tab
 	 */
-	public static void choix(int choix, Pizza[] tab){
+	public static void choix(int choix, String [][]tab){
 
 
 		do {
-			Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+			Scanner sc = new Scanner(System.in);
 
 			switch (choix) {
 			case 1:
@@ -94,19 +76,12 @@ public class PizzeriaAdminConsoleApp {
 				String nom = sc.nextLine(); 
 
 				System.out.print("Veuillez saisir le prix: ");
-				double prix = sc.nextDouble(); 
+				String prix = sc.nextLine(); 
 
 				tab = ajouterPizza(code, nom, prix, tab);
 
 				listePizzas(tab);
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
-=======
-				tab = ajouterPizza(code, nom, prix, tab);
-
-				listePizzas(tab);
-
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 				afficheMenu(tab);
 				break;
 			case 3:
@@ -127,7 +102,7 @@ public class PizzeriaAdminConsoleApp {
 					String nouveauNom = sc.nextLine(); 
 
 					System.out.print("Veuillez saisir le prix: ");
-					double nouveauPrix = sc.nextDouble(); 
+					String nouveauPrix = sc.nextLine(); 
 
 					//****** MISE A JOUR *******
 					tab = miseAjour(codeAmodifier ,nouveauCode, nouveauNom, nouveauPrix, tab);
@@ -152,7 +127,7 @@ public class PizzeriaAdminConsoleApp {
 				//je vÈrifie si le code existe
 				if (verifierSiCodeExixste(codeASupprimer, tab)) {
 
-					tab = supprimerPizza(codeASupprimer, tab);
+					supprimerPizza(codeASupprimer, tab);
 					//	System.out.println(tab.length);
 					listePizzas(tab);
 				} else {
@@ -182,19 +157,8 @@ public class PizzeriaAdminConsoleApp {
 	 * Cette methode affiche la liste des pizza
 	 * @param tab
 	 */
-	public static void listePizzas(Pizza tab[]){
+	public static void listePizzas(String tab[][]){
 		int tailleTab = tab.length;
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
-		int nbPizza = Pizza.nbPizzas = 0;
-		for (int i = 0; i < tailleTab ; i++) {
-			if (null == tab[i]) {
-				break;
-			}else{
-				System.out.println(tab[i].id+") "+tab[i].code+"->"+tab[i].nom+" "+tab[i].prix+"Ä");
-
-				nbPizza ++;
-			}
-=======
 		//string affiche=""
 		for (int i = 0; i < tailleTab; i++) {
 			if(null==tab[i][0]){
@@ -203,50 +167,36 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println(tab[i][0]+"->"+tab[i][1]+tab[i][2]);
 			}
 
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 		}
 
-		System.out.println("-------  "+nbPizza+" pizzas crÈÈes depuis líinitialisation du programme");
-
 	}
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
-	public static Pizza[] ajouterPizza(String code, String nom, double prix, Pizza tab[]){
-		Pizza tabAjout[] = new Pizza[1000];
-=======
 	public static String[][] ajouterPizza(String code, String nom, String prix, String[][]tab){
 		String tabAjout[][] = new String[1000][3];
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 
 		for (int i = 0; i < tab.length; i++) {
 
-			tabAjout[i] = tab[i];	
-
+			for (int j = 0; j < tab[i].length; j++) {
+				tabAjout[i][j] = tab[i][j];	
+			}
 		}
 
 		//je rÈcupere le premier index libre
 		int dernier =0;
-		for (int j = 0; j < tabAjout.length; j++) {
-			if (null == tabAjout[j]) {
-				break;
-			}else{
-				dernier ++;
-
-			}
-
+		for (int j = 0; j < tabAjout.length && tabAjout[j][0] != null; j++) {
+			dernier ++;
 		}
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
-		//	System.out.println(dernier);
-		tabAjout[dernier] = new Pizza(dernier, code, nom, prix);
+
+		System.out.println(dernier);
+		tabAjout[dernier][0] = code;
+		tabAjout[dernier][1] = nom;
+		tabAjout[dernier][2] = "("+prix+")Ä";
 
 		return tabAjout;
-=======
-		return tabAjout;
 
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 	}
 
@@ -258,18 +208,14 @@ public class PizzeriaAdminConsoleApp {
 	 * @param nouveauPrix
 	 * @param tab
 	 */
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
-	public static Pizza[] miseAjour(String code, String nouveauCode, String nouveauNom, double nouveauPrix, Pizza tab[]){
-=======
 	public static String[][] miseAjour(String code, String nouveauCode, String nouveauNom, String nouveauPrix, String[][]tab){
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 		for (int i = 0; i < tab.length; i++) {
-			if(code.equals(tab[i].code)){
+			if(code.equals(tab[i][0])){
 
-				tab[i].code = nouveauCode;
-				tab[i].nom = nouveauNom;
-				tab[i].prix = nouveauPrix;
+				tab[i][0] = nouveauCode;
+				tab[i][1] = nouveauNom;
+				tab[i][2] = "("+nouveauPrix+")Ä";
 
 			}	
 
@@ -285,11 +231,11 @@ public class PizzeriaAdminConsoleApp {
 	 * @param tab
 	 * @return vrai si le code existe
 	 */
-	public static boolean verifierSiCodeExixste(String code, Pizza tab[]){
+	public static boolean verifierSiCodeExixste(String code, String tab[][]){
 
 		for (int i = 0; i < tab.length; i++) {
 
-			if(code.equals(tab[i].code)){			
+			if(code.equals(tab[i][0])){			
 				return true;
 			}	
 		}
@@ -301,52 +247,33 @@ public class PizzeriaAdminConsoleApp {
 	 * @param code
 	 * @param tab
 	 */
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
-	public static Pizza[] supprimerPizza(String code, Pizza tab[]){
-
-		Pizza tabASupprimer[] = new Pizza[1000];
-=======
 	public static String[][] supprimerPizza(String code, String tab[][]){
 
 
 		String tabASupprimer[][] = new String[1000][3];
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 		//je charge toutes pizzas dans le nouveau tableau sauf celle a supprimer
 		for (int i = 0; i < tab.length; i++) {
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
-			if (null == tab[i]) {
-				break;
-			}else{
-				if (!code.equals(tab[i].code)) {
-					//	System.out.println(tab[i][j]+ " i : "+i+" j :"+ j);
-					tabASupprimer[i] = tab[i];	
-				} 
-
-			}	
-=======
 			for (int j = 0; j < tab[i].length; j++) {
 				//System.out.println(tab[i][0]);
-				if(null==tab[i][0]){
+				if(null==tab[i]){
 					break;
 				}else{
 					if (!code.equals(tab[i][0])) {
 						//	System.out.println(tab[i][j]+ " i : "+i+" j :"+ j);
 						tabASupprimer[i][j] = tab[i][j];	
 					} 
-				}		
+				}
+			
 
 			}
 		}
 
 		return tabASupprimer;
 
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
-		}
 
-		return tabASupprimer;
 	}
 
 

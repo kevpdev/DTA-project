@@ -7,7 +7,17 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzeriaAdminConsoleApp {
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
+	//	public static String[][] pizzas = {{"PEP" ,"PÈpÈroni" ,"(12.50Ä)"},
+	//            {"MAR" ,"Margherita" ,"(14.00Ä)"},
+	//            {"REI" ,"Reine" ,"(11.50Ä)"},
+	//            {"FRO" ,"La 4 fromages" ,"(12.00Ä)"},
+	//            {"CAN" ,"La cannibale" ,"(12.50Ä)"},
+	//            {"SAV" ,"La Savoyage" ,"(13.00Ä)"},
+	//            {"ORI" ,"L' orientale" ,"(13.50Ä)"},
+	//            {"IND" ,"L'indienne" ,"(14.00Ä)"}};
+	//	
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -21,22 +31,6 @@ public class PizzeriaAdminConsoleApp {
 				new Pizza(5, "SAV" ,"La Savoyage", 13.00),
 				new Pizza(6, "ORI" ,"L' orientale", 15.50),
 				new Pizza(7, "IND" ,"L'indienne", 14.00)};
-=======
-
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		String[][] pizzas = {{"PEP" ,"PÈpÈroni" ,"(12.50Ä)"},
-				{"MAR" ,"Margherita" ,"(14.00Ä)"},
-				{"REI" ,"Reine" ,"(11.50Ä)"},
-				{"FRO" ,"La 4 fromages" ,"(12.00Ä)"},
-				{"CAN" ,"La cannibale" ,"(12.50Ä)"},
-				{"SAV" ,"La Savoyage" ,"(13.00Ä)"},
-				{"ORI" ,"L' orientale" ,"(13.50Ä)"},
-				{"IND" ,"L'indienne" ,"(14.00Ä)"}};
-
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 		//affichage du menu
 		afficheMenu(pizzas);
 
@@ -100,13 +94,6 @@ public class PizzeriaAdminConsoleApp {
 
 				listePizzas(tab);
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
-=======
-				tab = ajouterPizza(code, nom, prix, tab);
-
-				listePizzas(tab);
-
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 				afficheMenu(tab);
 				break;
 			case 3:
@@ -184,26 +171,15 @@ public class PizzeriaAdminConsoleApp {
 	 */
 	public static void listePizzas(Pizza tab[]){
 		int tailleTab = tab.length;
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 		int nbPizza = Pizza.nbPizzas = 0;
 		for (int i = 0; i < tailleTab ; i++) {
 			if (null == tab[i]) {
 				break;
 			}else{
-				System.out.println(tab[i].id+") "+tab[i].code+"->"+tab[i].nom+" "+tab[i].prix+"Ä");
+				System.out.println(tab[i].id+") "+tab[i].code+"->"+tab[i].nom+" "+tab[i].prix+"0Ä");
 
 				nbPizza ++;
 			}
-=======
-		//string affiche=""
-		for (int i = 0; i < tailleTab; i++) {
-			if(null==tab[i][0]){
-				break;
-			}else{
-				System.out.println(tab[i][0]+"->"+tab[i][1]+tab[i][2]);
-			}
-
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 		}
 
@@ -211,13 +187,8 @@ public class PizzeriaAdminConsoleApp {
 
 	}
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 	public static Pizza[] ajouterPizza(String code, String nom, double prix, Pizza tab[]){
 		Pizza tabAjout[] = new Pizza[1000];
-=======
-	public static String[][] ajouterPizza(String code, String nom, String prix, String[][]tab){
-		String tabAjout[][] = new String[1000][3];
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 
 		for (int i = 0; i < tab.length; i++) {
@@ -238,15 +209,10 @@ public class PizzeriaAdminConsoleApp {
 
 		}
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 		//	System.out.println(dernier);
 		tabAjout[dernier] = new Pizza(dernier, code, nom, prix);
 
 		return tabAjout;
-=======
-		return tabAjout;
-
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 	}
 
@@ -258,11 +224,7 @@ public class PizzeriaAdminConsoleApp {
 	 * @param nouveauPrix
 	 * @param tab
 	 */
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 	public static Pizza[] miseAjour(String code, String nouveauCode, String nouveauNom, double nouveauPrix, Pizza tab[]){
-=======
-	public static String[][] miseAjour(String code, String nouveauCode, String nouveauNom, String nouveauPrix, String[][]tab){
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 		for (int i = 0; i < tab.length; i++) {
 			if(code.equals(tab[i].code)){
@@ -301,21 +263,13 @@ public class PizzeriaAdminConsoleApp {
 	 * @param code
 	 * @param tab
 	 */
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 	public static Pizza[] supprimerPizza(String code, Pizza tab[]){
 
 		Pizza tabASupprimer[] = new Pizza[1000];
-=======
-	public static String[][] supprimerPizza(String code, String tab[][]){
-
-
-		String tabASupprimer[][] = new String[1000][3];
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 		//je charge toutes pizzas dans le nouveau tableau sauf celle a supprimer
 		for (int i = 0; i < tab.length; i++) {
 
-<<<<<<< HEAD:workspace/pizzeria-console-objet/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 			if (null == tab[i]) {
 				break;
 			}else{
@@ -324,27 +278,16 @@ public class PizzeriaAdminConsoleApp {
 					tabASupprimer[i] = tab[i];	
 				} 
 
-			}	
-=======
-			for (int j = 0; j < tab[i].length; j++) {
-				//System.out.println(tab[i][0]);
-				if(null==tab[i][0]){
-					break;
-				}else{
-					if (!code.equals(tab[i][0])) {
-						//	System.out.println(tab[i][j]+ " i : "+i+" j :"+ j);
-						tabASupprimer[i][j] = tab[i][j];	
-					} 
-				}		
-
 			}
-		}
+		
 
-		return tabASupprimer;
 
->>>>>>> 2e commit perte de donn√©e:workspace/piezzeria-console-imperiative/src/fr/pizzeria/console/PizzeriaAdminConsoleApp.java
 
 		}
+
+
+		System.out.println(tabASupprimer.length);
+		//listePizzas(pizzas);
 
 		return tabASupprimer;
 	}
