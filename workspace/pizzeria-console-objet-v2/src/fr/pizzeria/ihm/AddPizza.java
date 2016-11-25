@@ -1,5 +1,8 @@
 package fr.pizzeria.ihm;
 
+
+import fr.pizzeria.excpetion.AddPizzaException;
+import fr.pizzeria.excpetion.PizzaException;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.tool.IhmUtil;
 
@@ -14,10 +17,10 @@ public class AddPizza extends Option{
 	}
 
 	@Override
-	public void executeOption() {
+	public void executeOption() throws PizzaException {
 		// TODO Auto-generated method stub
 		
-		try {
+	
 			System.out.println("Ajout d'une nouvelle pizza");
 
 			System.out.print("Veuillez saisir le code: ");
@@ -30,17 +33,12 @@ public class AddPizza extends Option{
 			double prix = ihmUtil.getScanner().nextDouble(); 
 			
 			Pizza pizza = new Pizza(0, code, nom, prix);
-			
+
 			if(ihmUtil.getPizzaDao().addPizza(pizza)){
 				System.out.println("Ajout éffectué !");
+			}else{
+				System.out.println("Echec de l'ajout !");
 			}
-			
-		
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-		}
 		
 		
 	

@@ -1,6 +1,8 @@
 package fr.pizzeria.ihm;
 
 
+import fr.pizzeria.excpetion.PizzaException;
+import fr.pizzeria.excpetion.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.tool.IhmUtil;
 
@@ -15,8 +17,8 @@ public class UpdatePizza extends Option {
 	}
 
 	@Override
-	public void executeOption() {
-		try {
+	public void executeOption() throws PizzaException{
+		
 
 			ListPizza listp = new ListPizza(ihmUtil);
 			listp.executeOption();
@@ -47,13 +49,7 @@ public class UpdatePizza extends Option {
 
 			}
 
-
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e.getMessage());
-		}
-
+		
 	}
 
 	@Override

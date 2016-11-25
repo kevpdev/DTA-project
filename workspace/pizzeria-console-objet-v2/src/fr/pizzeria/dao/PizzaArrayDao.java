@@ -1,120 +1,102 @@
 package fr.pizzeria.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.text.html.HTML.Tag;
 
+import fr.pizzeria.excpetion.AddPizzaException;
+import fr.pizzeria.excpetion.DeletePizzaException;
+import fr.pizzeria.excpetion.PizzaException;
+import fr.pizzeria.excpetion.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaArrayDao implements IPizzaDao {
 
-	Pizza [] pizzas={
-			new Pizza(0,"PEP" ,"Pépéroni", 12.50),
-			new Pizza(1, "MAR" ,"Margherita", 14.00),
-			new Pizza(2, "REI" ,"Reine", 11.50),
-			new Pizza(3, "FRO" ,"La 4 fromages", 12.00),
-			new Pizza(4, "CAN" ,"La cannibale", 12.50),
-			new Pizza(5, "SAV" ,"La Savoyage", 13.00),
-			new Pizza(6, "ORI" ,"L' orientale", 15.50),
-			new Pizza(7, "IND" ,"L'indienne", 14.00)};
+	public List<Pizza> pizzas = new ArrayList<>();
+
+	public  PizzaArrayDao() {
+
+		// TODO Auto-generated constructor stub
+		pizzas.add(new Pizza(0,"PEP" ,"Pépéroni", 12.50));
+		pizzas.add(new Pizza(1, "MAR" ,"Margherita", 14.00));
+		pizzas.add(new Pizza(2, "REI" ,"Reine", 11.50));
+		pizzas.add(new Pizza(3, "FRO" ,"La 4 fromages", 12.00));
+		pizzas.add(new Pizza(4, "CAN" ,"La cannibale", 12.50));
+		pizzas.add(new Pizza(5, "SAV" ,"La Savoyage", 13.00));
+		pizzas.add(new Pizza(6, "ORI" ,"L' orientale", 15.50));
+		pizzas.add(new Pizza(7, "IND" ,"L'indienne", 14.00));
+	}
 
 	@Override
-	public Pizza[] findAllPizzas() {
+	public List<Pizza> findAllPizzas() {
 		// TODO Auto-generated method stub
 		return pizzas;
 	}
 
 	@Override
-	public boolean addPizza(Pizza pizza) {
+	public boolean addPizza(Pizza pizza) throws PizzaException {
+	
+		if (!isValid(pizza)) {
+			throw new AddPizzaException();
 
-
-
-		Pizza [] pizzasAdd = new Pizza[1000];
-
-		try {
-			for (int i = 0; i < pizzas.length; i++) {
-
-				pizzasAdd[i] = pizzas[i];	
-
-			}
-
-			//je récupere le premier index libre
-			int dernier =0;
-			for (int j = 0; j < pizzasAdd.length; j++) {
-				if (null == pizzasAdd[j]) {
-					break;
-				}else{
-					dernier ++;
-
-				}
-
-			}
-			pizza.setId(dernier);
-			pizzasAdd[dernier] = pizza;
-			pizzas = pizzasAdd;
-
-			return true;
-
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
+		pizza.setId(pizzas.size());
+		pizzas.add(pizza);
+
+		return true;
 
 
-		return false;
 
 	}
 
+	private boolean isValid(Pizza pizza) {
+		
+		return pizza != null && pizza.getCode() != null;
+	}
+
 	@Override
-	public boolean updatePizza(Pizza pizza) {
+	public boolean updatePizza(Pizza pizza) throws PizzaException {
+		
+		if (!isValid(pizza)) {
+			throw new UpdatePizzaException();
 
-		try{
-			//je récupere le premier index libre
-
-			for (Pizza pizzaArray : pizzas) {
-				if (pizza.getId() == pizzaArray.getId()) {
-
-					pizzaArray.setCode(pizza.getCode());
-					pizzaArray.setNom(pizza.getNom());
-					pizzaArray.setPrix(pizza.getPrix());
-
-					return true;
-				}
-			}
-
-
-
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
+
+		for (Pizza pizzaArrayL : pizzas) {
+			if (pizza.getId() == pizzaArrayL.getId()) {
+
+				pizzaArrayL.setCode(pizza.getCode());
+				pizzaArrayL.setNom(pizza.getNom());
+				pizzaArrayL.setPrix(pizza.getPrix());
+
+				return true;
+			}
+		}
+
 
 
 		return false;
 	}
 
 	@Override
-	public boolean deletePizza(Pizza pizza) {
+	public boolean deletePizza(Pizza pizza) throws PizzaException {
 
-		Pizza [] pizzasDel = new Pizza[1000];
+		if (!isValid(pizza)) {
+			throw new DeletePizzaException();
 
-		try {
-			for (int i = 0; i < pizzas.length; i++) {
-				if(!(pizza.equals(pizzas[i]))){
-					pizzasDel[i] = pizzas[i];	
-				}					
+		}
+		
+		for (int i = 0; i < pizzas.size(); i++) {
+			if(!(pizza.equals(pizzas))){
+				pizzas.remove(i);
+			}					
 
-			}
-
-			pizzas = pizzasDel;
-
-			return true;
-
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
 
 
-		return false;
+		return true;
+
 
 	}
 

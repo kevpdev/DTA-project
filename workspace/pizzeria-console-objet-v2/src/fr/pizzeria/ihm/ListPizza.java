@@ -1,4 +1,6 @@
 package fr.pizzeria.ihm;
+import java.util.List;
+
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.tool.IhmUtil;
 
@@ -14,11 +16,13 @@ public class ListPizza extends Option {
 	@Override
 	public void executeOption() {
 
-		Pizza[] pizzas = ihmUtil.getPizzaDao().findAllPizzas();
+		List<Pizza> pizzas = ihmUtil.getPizzaDao().findAllPizzas();
 		for (Pizza pizza : pizzas) {
 			if(!(pizza == null))
 			System.out.println(pizza);
 		}
+		
+		
 		
 	}
 

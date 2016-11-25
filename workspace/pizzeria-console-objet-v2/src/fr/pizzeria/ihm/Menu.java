@@ -1,5 +1,14 @@
 package fr.pizzeria.ihm;
 
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+
+import fr.pizzeria.excpetion.PizzaException;
+import fr.pizzeria.model.Pizza;
 import fr.pizzeria.tool.IhmUtil;
 
 public class Menu  {
@@ -7,7 +16,8 @@ public class Menu  {
 
 	public String titre;
 	public IhmUtil ihmUtil;
-	public Option [] options = new Option[5];
+	//public Option [] options = new Option[5];
+	public Map<Integer, Option> options = new HashMap<>();
 
 
 	public Menu() {
@@ -18,11 +28,12 @@ public class Menu  {
 	public Menu(String titre, IhmUtil ihmUtil) {
 		super();
 		this.titre = titre;
-		this.options[0] = new ListPizza(ihmUtil);
-		this.options[1] = new AddPizza(ihmUtil);
-		this.options[2] = new UpdatePizza(ihmUtil);
-		this.options[3] = new DeletePizza(ihmUtil);
-		this.options[4] = new ExistMenu();
+		this.options.put(0, new ListPizza(ihmUtil));
+		this.options.put(1, new AddPizza(ihmUtil));
+		this.options.put(2, new UpdatePizza(ihmUtil));
+		this.options.put(3, new DeletePizza(ihmUtil));
+		this.options.put(4, new ExistMenu());
+
 		this.ihmUtil = ihmUtil;
 	}
 
@@ -37,12 +48,9 @@ public class Menu  {
 	}
 
 
-	public Option[] getOptions() {
-		return options;
-	}
 
 
-	public void setOptions(Option[] options) {
+	public void setOptions(HashMap<Integer, Option> options) {
 		this.options = options;
 	}
 
@@ -50,24 +58,57 @@ public class Menu  {
 	public void display(){
 
 		System.out.println(this.titre);
-		for (Option option : options) {
-			System.out.println(option.libelle);
+
+		//		for (Option option : options) {
+		//			System.out.println(option.libelle);
+		//		}
+
+		for (Map.Entry<Integer, Option> entree : options.entrySet()) {
+			System.out.println(entree.getValue().libelle);
 		}
 
 	}
 
 	public void action(){
+		
+		Integer action = 0;
+		boolean notInteger =true;
+		
+	do {
+		
+		try {
+			System.out.print("Votre choix : ");
+			Scanner sc = new Scanner(System.in);
+			action = sc.nextInt();
+			notInteger = false;		
 
-		System.out.print("Votre choix : ");
-		Integer action = ihmUtil.getScanner().nextInt();
-
-		if (action < 5) {
-			this.options[action -1].executeOption();		
-			start();
-
-		}else if(action  == 99){
-			this.options[4].executeOption();
+		} catch (InputMismatchException e) {
+			System.out.println("seulement un nombre entier");
 		}
+
+	} while (notInteger);
+	
+			
+		System.out.println(action);	
+			try{
+				if (action < 5) {
+
+					this.options.get(action -1).executeOption();
+
+					start();
+
+				}else if(action  == 99){
+
+					this.options.get(4).executeOption();
+				}
+			}
+		 catch (NumberFormatException | PizzaException e) {	
+
+			System.out.println(e.getMessage());
+
+		}
+
+			
 
 
 	}

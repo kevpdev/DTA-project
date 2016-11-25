@@ -1,5 +1,7 @@
 package fr.pizzeria.ihm;
 
+import fr.pizzeria.excpetion.PizzaException;
+
 public abstract class  Option {
 
 	public String libelle;
@@ -15,7 +17,7 @@ public abstract class  Option {
 	}
 
 
-	public abstract void executeOption();
+	public abstract void executeOption() throws PizzaException;
 
 	public abstract void libelleOption();
 
