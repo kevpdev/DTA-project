@@ -83,7 +83,7 @@ public class Menu  {
 			notInteger = false;		
 
 		} catch (InputMismatchException e) {
-			System.out.println("seulement un nombre entier");
+			System.out.println("!!!!!!!!!!! Seulement un nombre entier !!!!!!!!!");
 		}
 
 	} while (notInteger);
