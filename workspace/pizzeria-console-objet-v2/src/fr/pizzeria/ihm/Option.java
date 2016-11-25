@@ -15,7 +15,7 @@ public abstract class  Option {
 	}
 
 
-	public abstract boolean executeOption();
+	public abstract void executeOption();
 
 	public abstract void libelleOption();
 

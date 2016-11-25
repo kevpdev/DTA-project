@@ -2,20 +2,25 @@ package fr.pizzeria.model;
 
 public class Pizza {
 	
-	public int id;
-	public String code;
-	public String nom;
-	public double prix;
+	private int id;
+	private String code;
+	private String nom;
+	private double prix;
 	public static int nbPizzas;
 	
-	
-	public Pizza(int id, String code, String nom, double prix) {
+	public Pizza(String code, String nom, double prix) {
 		super();
 		nbPizzas++;
-		this.id = id;
-		this.code = code;
-		this.nom = nom;
-		this.prix = prix;
+		this.setCode(code);
+		this.setNom(nom);
+		this.setPrix(prix);
+	}
+	
+	public Pizza(int id, String code, String nom, double prix) {
+		this(code, nom, prix);
+		nbPizzas++;
+		this.setId(id);
+
 	}
 
 

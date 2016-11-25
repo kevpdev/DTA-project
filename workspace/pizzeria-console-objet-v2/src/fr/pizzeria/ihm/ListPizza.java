@@ -12,13 +12,14 @@ public class ListPizza extends Option {
 		this.ihmUtil = ihmUtil;
 	}
 	@Override
-	public boolean executeOption() {
+	public void executeOption() {
 
 		Pizza[] pizzas = ihmUtil.getPizzaDao().findAllPizzas();
 		for (Pizza pizza : pizzas) {
+			if(!(pizza == null))
 			System.out.println(pizza);
 		}
-		return true;
+		
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class Menu  {
 		this.options[0] = new ListPizza(ihmUtil);
 		this.options[1] = new AddPizza(ihmUtil);
 		this.options[2] = new UpdatePizza(ihmUtil);
-		this.options[3] = new DeletePizza();
+		this.options[3] = new DeletePizza(ihmUtil);
 		this.options[4] = new ExistMenu();
 		this.ihmUtil = ihmUtil;
 	}
@@ -61,8 +61,9 @@ public class Menu  {
 		System.out.print("Votre choix : ");
 		Integer action = ihmUtil.getScanner().nextInt();
 
-		if (action < 4) {
-			this.options[action -1].executeOption();
+		if (action < 5) {
+			this.options[action -1].executeOption();		
+			start();
 
 		}else if(action  == 99){
 			this.options[4].executeOption();

@@ -7,9 +7,11 @@ public class ExistMenu extends Option {
 		this.setLibelle("99. Quittez l'application");
 	}
 	@Override
-	public boolean executeOption() {
-		// TODO Auto-generated method stub
-		return false;
+	public void executeOption() {
+		
+		System.out.println("Aurevoir");
+		
+		System.exit(0);
 	}
 
 	@Override
