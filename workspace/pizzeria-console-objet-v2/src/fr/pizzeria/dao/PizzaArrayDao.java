@@ -5,10 +5,11 @@ import java.util.List;
 
 import javax.swing.text.html.HTML.Tag;
 
-import fr.pizzeria.excpetion.AddPizzaException;
-import fr.pizzeria.excpetion.DeletePizzaException;
-import fr.pizzeria.excpetion.PizzaException;
-import fr.pizzeria.excpetion.UpdatePizzaException;
+import fr.pizzeria.excepetion.AddPizzaException;
+import fr.pizzeria.excepetion.DeletePizzaException;
+import fr.pizzeria.excepetion.PizzaException;
+import fr.pizzeria.excepetion.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaArrayDao implements IPizzaDao {
@@ -18,14 +19,14 @@ public class PizzaArrayDao implements IPizzaDao {
 	public  PizzaArrayDao() {
 
 		// TODO Auto-generated constructor stub
-		pizzas.add(new Pizza(0,"PEP" ,"Pépéroni", 12.50));
-		pizzas.add(new Pizza(1, "MAR" ,"Margherita", 14.00));
-		pizzas.add(new Pizza(2, "REI" ,"Reine", 11.50));
-		pizzas.add(new Pizza(3, "FRO" ,"La 4 fromages", 12.00));
-		pizzas.add(new Pizza(4, "CAN" ,"La cannibale", 12.50));
-		pizzas.add(new Pizza(5, "SAV" ,"La Savoyage", 13.00));
-		pizzas.add(new Pizza(6, "ORI" ,"L' orientale", 15.50));
-		pizzas.add(new Pizza(7, "IND" ,"L'indienne", 14.00));
+		pizzas.add(new Pizza(0,"PEP" ,"Pépéroni", 12.50, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza(1, "MAR" ,"Margherita", 14.00, CategoriePizza.SANS_VIANDE));
+		pizzas.add(new Pizza(2, "REI" ,"Reine", 11.50, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza(3, "FRO" ,"La 4 fromages", 12.00, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza(4, "CAN" ,"La cannibale", 12.50, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza(5, "SAV" ,"La Savoyage", 13.00, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza(6, "ORI" ,"L' orientale", 15.50, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza(7, "IND" ,"L'indienne", 14.00, CategoriePizza.VIANDE));
 	}
 
 	@Override
@@ -69,6 +70,7 @@ public class PizzaArrayDao implements IPizzaDao {
 				pizzaArrayL.setCode(pizza.getCode());
 				pizzaArrayL.setNom(pizza.getNom());
 				pizzaArrayL.setPrix(pizza.getPrix());
+				pizzaArrayL.setCategPizza(pizza.getCategPizza());
 
 				return true;
 			}
@@ -87,13 +89,26 @@ public class PizzaArrayDao implements IPizzaDao {
 
 		}
 		
-		for (int i = 0; i < pizzas.size(); i++) {
-			if(!(pizza.equals(pizzas))){
-				pizzas.remove(i);
-			}					
-
+//		for (int i = 0; i < pizzas.size(); i++) {
+//			if(!(pizza.getCode().equals(pizzas.get(i).getCode()))){
+//				pizzas.remove(i);
+//			}					
+//
+//		}
+		int i = 0;
+		boolean stop =false;
+		while (i<pizzas.size() && !stop) {
+			if((pizza.getCode().equals(pizzas.get(i).getCode()))){
+				stop = true;
+			}
+			if (!stop) {
+				i++;
+			}
+		
+			
 		}
-
+		System.out.println(i);
+		pizzas.remove(i);
 
 		return true;
 

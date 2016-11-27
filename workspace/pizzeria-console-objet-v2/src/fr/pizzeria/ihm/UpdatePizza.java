@@ -1,8 +1,13 @@
 package fr.pizzeria.ihm;
 
 
-import fr.pizzeria.excpetion.PizzaException;
-import fr.pizzeria.excpetion.UpdatePizzaException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import fr.pizzeria.excepetion.PizzaException;
+import fr.pizzeria.excepetion.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.tool.IhmUtil;
 
@@ -37,8 +42,19 @@ public class UpdatePizza extends Option {
 
 				System.out.print("Veuillez saisir le nouveau prix: ");
 				double prix = ihmUtil.getScanner().nextDouble(); 
+				
+				System.out.println("Liste des catégories: ");
+				List<CategoriePizza> listCateg = new ArrayList<>(Arrays.asList(CategoriePizza.values()));
+				for (int i = 0; i < listCateg.size(); i++) {
+					
+					System.out.println(i+1+". "+listCateg.get(i).toString());
+					
+				}
+				
+				System.out.print("Veuillez saisir le numéro de la catégorie: ");
+				int categ = ihmUtil.getScanner().nextInt(); 
 
-				Pizza pizza = new Pizza(pizzaAModifier.getId(), code, nom, prix);
+				Pizza pizza = new Pizza(pizzaAModifier.getId(), code, nom, prix, listCateg.get(categ-1));
 
 				if(ihmUtil.getPizzaDao().updatePizza(pizza)){
 					System.out.println("Mise à jour éffectué !");
