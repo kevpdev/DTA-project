@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
-import fr.pizzeria.excpetion.PizzaException;
+import fr.pizzeria.excepetion.PizzaException;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.tool.IhmUtil;
 

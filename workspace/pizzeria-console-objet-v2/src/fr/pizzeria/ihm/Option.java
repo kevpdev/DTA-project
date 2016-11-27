@@ -1,6 +1,6 @@
 package fr.pizzeria.ihm;
 
-import fr.pizzeria.excpetion.PizzaException;
+import fr.pizzeria.excepetion.PizzaException;
 
 public abstract class  Option {
 

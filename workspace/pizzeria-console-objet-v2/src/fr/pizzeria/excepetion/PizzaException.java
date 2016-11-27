@@ -1,4 +1,4 @@
-package fr.pizzeria.excpetion;
+package fr.pizzeria.excepetion;
 
 public class PizzaException extends Exception {
 

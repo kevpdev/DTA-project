@@ -6,6 +6,7 @@ public class Pizza {
 	private String code;
 	private String nom;
 	private double prix;
+	private CategoriePizza categPizza;
 	public static int nbPizzas;
 	
 	public Pizza(String code, String nom, double prix) {
@@ -20,6 +21,13 @@ public class Pizza {
 		this(code, nom, prix);
 		nbPizzas++;
 		this.setId(id);
+
+	}
+	
+	public Pizza(int id, String code, String nom, double prix, CategoriePizza categ) {
+		this(id, code, nom, prix);
+		nbPizzas++;
+		this.setCategPizza(categ);
 
 	}
 
@@ -72,12 +80,22 @@ public class Pizza {
 	public static void setNbPizzas(int nbPizzas) {
 		Pizza.nbPizzas = nbPizzas;
 	}
+	
+	public CategoriePizza getCategPizza() {
+		return categPizza;
+	}
+
+	public void setCategPizza(CategoriePizza categPizza) {
+		this.categPizza = categPizza;
+	}
+	
 
 
 	@Override
 	public String toString() {
-		return "" + id + ") " + code + "-> " + nom + " (" + prix + "€)";
+		return "" + id + ") " + code + "-> " + nom + " (" + prix + "€) Categorie : "+categPizza;
 	}
+
 	
 	
 

@@ -2,10 +2,10 @@ package fr.pizzeria.dao;
 
 import java.util.List;
 
-import fr.pizzeria.excpetion.AddPizzaException;
-import fr.pizzeria.excpetion.DeletePizzaException;
-import fr.pizzeria.excpetion.PizzaException;
-import fr.pizzeria.excpetion.UpdatePizzaException;
+import fr.pizzeria.excepetion.AddPizzaException;
+import fr.pizzeria.excepetion.DeletePizzaException;
+import fr.pizzeria.excepetion.PizzaException;
+import fr.pizzeria.excepetion.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public interface IPizzaDao {
