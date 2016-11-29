@@ -1,46 +1,42 @@
 package fr.pizzeria.ihm;
+
+import java.io.FileNotFoundException;
+
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.tool.IhmUtil;
 
 public class DeletePizza extends Option {
 
-
 	public IhmUtil ihmUtil;
 
-	public  DeletePizza(IhmUtil ihmUtil) {
+	public DeletePizza(IhmUtil ihmUtil) {
 
 		this.setLibelle("4. Suppression d'une pizza");
 		this.ihmUtil = ihmUtil;
 	}
 
 	@Override
-	public void executeOption() {
+	public void executeOption() throws FileNotFoundException {
 		ListPizza listp = new ListPizza(ihmUtil);
 		listp.executeOption();
-		
+
 		try {
-			
+
 			System.out.print("Veuillez saisir le code de la pizza à  supprimer: ");
-			String codeASupprimer = ihmUtil.getScanner().next(); 
+			String codeASupprimer = ihmUtil.getScanner().next();
 
 			Pizza pizzaASup = ihmUtil.getPizzaDao().getPizzaByCode(codeASupprimer);
 			if (codeASupprimer != null) {
 
+				System.out.println(ihmUtil.getPizzaDao().deletePizza(pizzaASup) ? "Suppression éffectué"
+						: "Echec de la suppression");
 
-				if(ihmUtil.getPizzaDao().deletePizza(pizzaASup)){
-					System.out.println("Suppression éffectué");
-				}else{
-					System.out.println("Echec de la suppression");
-				}
-
-
-			}else{
+			} else {
 				System.out.println("la pizza à supprimer n'existe pas !");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
 
 	}
 

@@ -1,6 +1,6 @@
 package fr.pizzeria.excepetion;
 
-public class PizzaException extends Exception {
+public class PizzaException extends RuntimeException {
 
 	/**
 	 * 
@@ -31,12 +31,11 @@ public class PizzaException extends Exception {
 		super(arg0);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-@Override
-public String getMessage() {
-	// TODO Auto-generated method stub
-	return super.getMessage();
-}
-	
+
+	@Override
+	public String getMessage() {
+		// TODO Auto-generated method stub
+		return super.getMessage();
+	}
+
 }

@@ -1,0 +1,8 @@
+PEP-> Pépéroni (12.5€) Categorie : Viande
+MAR-> Margherita (14.0€) Categorie : Sans Viande
+REI-> Reine (11.5€) Categorie : Viande
+FRO-> La 4 fromages (12.0€) Categorie : Viande
+CAN-> La cannibale (12.5€) Categorie : Viande
+SAV-> La Savoyage (13.0€) Categorie : Viande
+ORI-> L' orientale (15.5€) Categorie : Viande
+KEB-> kebab (16.0€) Categorie : Viande
