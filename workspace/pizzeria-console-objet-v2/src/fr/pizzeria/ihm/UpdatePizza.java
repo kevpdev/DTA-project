@@ -1,6 +1,6 @@
 package fr.pizzeria.ihm;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +21,7 @@ public class UpdatePizza extends Option {
 	}
 
 	@Override
-	public void executeOption() throws PizzaException, FileNotFoundException {
+	public void executeOption() throws PizzaException, IOException {
 
 		ListPizza listp = new ListPizza(ihmUtil);
 		listp.executeOption();

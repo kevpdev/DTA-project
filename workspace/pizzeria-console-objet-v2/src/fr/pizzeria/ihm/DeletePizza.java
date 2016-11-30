@@ -1,6 +1,6 @@
 package fr.pizzeria.ihm;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.tool.IhmUtil;
@@ -16,7 +16,7 @@ public class DeletePizza extends Option {
 	}
 
 	@Override
-	public void executeOption() throws FileNotFoundException {
+	public void executeOption() throws IOException {
 		ListPizza listp = new ListPizza(ihmUtil);
 		listp.executeOption();
 

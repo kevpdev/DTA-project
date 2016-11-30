@@ -1,9 +1,7 @@
 package fr.pizzeria.ihm;
 
-import java.io.FileNotFoundException;
-import java.util.List;
+import java.io.IOException;
 
-import fr.pizzeria.model.Pizza;
 import fr.pizzeria.model.TypeTriPizza;
 import fr.pizzeria.tool.IhmUtil;
 
@@ -19,10 +17,11 @@ public class ListPizza extends Option {
 	}
 
 	@Override
-	public void executeOption() throws FileNotFoundException {
+	public void executeOption() throws IOException {
+		ihmUtil.getPizzaDao().findAllPizzas();
+		// List<Pizza> pizzas = ihmUtil.getPizzaDao().findAllPizzas();
 
-		List<Pizza> pizzas = ihmUtil.getPizzaDao().findAllPizzas();
-		pizzas.forEach(System.out::println);
+		// pizzas.forEach(System.out::println);
 
 		// ihmUtil.getPizzaDao().savePizzasFile(ihmUtil.getFilename());
 	}

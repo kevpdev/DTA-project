@@ -1,6 +1,6 @@
 package fr.pizzeria.ihm;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -94,7 +94,7 @@ public class Menu {
 
 				this.options.get(4).executeOption();
 			}
-		} catch (NumberFormatException | PizzaException | FileNotFoundException e) {
+		} catch (PizzaException | IOException | IllegalArgumentException | IllegalAccessException e) {
 
 			System.out.println(e.getMessage());
 

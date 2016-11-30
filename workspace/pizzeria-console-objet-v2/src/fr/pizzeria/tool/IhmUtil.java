@@ -2,15 +2,15 @@ package fr.pizzeria.tool;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDaoFactory;
 
 public class IhmUtil {
 
 	private final Scanner scanner;
-	private final IPizzaDao pizzaDao;
+	private final PizzaDaoFactory pizzaDao;
 	private final String filename = "pizzas.txt";
 
-	public IhmUtil(final Scanner scanner, final IPizzaDao pizzaDao) {
+	public IhmUtil(final Scanner scanner, final PizzaDaoFactory pizzaDao) {
 		super();
 		this.scanner = scanner;
 		this.pizzaDao = pizzaDao;
@@ -20,7 +20,7 @@ public class IhmUtil {
 		return this.scanner;
 	}
 
-	public IPizzaDao getPizzaDao() {
+	public PizzaDaoFactory getPizzaDao() {
 		return this.pizzaDao;
 	}
 

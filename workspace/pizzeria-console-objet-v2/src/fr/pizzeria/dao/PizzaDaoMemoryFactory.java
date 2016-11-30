@@ -1,8 +1,6 @@
 package fr.pizzeria.dao;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +11,12 @@ import fr.pizzeria.excepetion.UpdatePizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaArrayDao implements IPizzaDao {
+public class PizzaDaoMemoryFactory implements PizzaDaoFactory {
 
 	public List<Pizza> pizzas = new ArrayList<>();
 	public String filename = "pizzas.txt";
 
-	public PizzaArrayDao() throws FileNotFoundException {
+	public PizzaDaoMemoryFactory() throws FileNotFoundException {
 
 		// TODO Auto-generated constructor stub
 		pizzas.add(new Pizza(0, "PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
@@ -30,18 +28,17 @@ public class PizzaArrayDao implements IPizzaDao {
 		pizzas.add(new Pizza(6, "ORI", "L' orientale", 15.50, CategoriePizza.VIANDE));
 		pizzas.add(new Pizza(7, "IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
 
-		savePizzasFile(filename);
-
 	}
-
-	public void savePizzasFile(String filename) throws FileNotFoundException {
-		PrintWriter pw = new PrintWriter(new FileOutputStream(filename));
-		pizzas.forEach(value -> {
-			pw.println(value);
-		});
-
-		pw.close();
-	}
+	//
+	// public void savePizzasFile(String filename) throws FileNotFoundException
+	// {
+	// PrintWriter pw = new PrintWriter(new FileOutputStream(filename));
+	// pizzas.forEach(value -> {
+	// pw.println(value);
+	// });
+	//
+	// pw.close();
+	// }
 
 	// public List<Pizza> getPizzasFile(String filename) {
 	// Stream<String> stream = Files.lines(Paths.get(filename));
@@ -66,7 +63,6 @@ public class PizzaArrayDao implements IPizzaDao {
 		}
 		pizza.setId(pizzas.size());
 		pizzas.add(pizza);
-		savePizzasFile(filename);
 		return true;
 
 	}
@@ -91,7 +87,6 @@ public class PizzaArrayDao implements IPizzaDao {
 				pizzaArrayL.setNom(pizza.getNom());
 				pizzaArrayL.setPrix(pizza.getPrix());
 				pizzaArrayL.setCategPizza(pizza.getCategPizza());
-				savePizzasFile(filename);
 				return true;
 			}
 		}
@@ -119,7 +114,6 @@ public class PizzaArrayDao implements IPizzaDao {
 		}
 		System.out.println(i);
 		pizzas.remove(i);
-		savePizzasFile(filename);
 		return true;
 
 	}

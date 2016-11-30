@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm;
 
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class PizzaTarifMax extends Option {
 	}
 
 	@Override
-	public void executeOption() throws PizzaException {
+	public void executeOption() throws PizzaException, IOException {
 
 		List<Pizza> pizzas = ihmUtil.getPizzaDao().findAllPizzas();
 		Pizza pizzaMax = pizzas.stream().max(Comparator.comparing(Pizza::getPrix)).get();

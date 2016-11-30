@@ -14,12 +14,18 @@ public class Pizza {
 	private CategoriePizza categPizza;
 	public static int nbPizzas;
 
+	public Pizza() {
+
+	}
+
 	public Pizza(String code, String nom, double prix) {
 		super();
-		nbPizzas++;
+
+		this.setId(nbPizzas);
 		this.setCode(code);
 		this.setNom(nom);
 		this.setPrix(prix);
+		nbPizzas++;
 	}
 
 	public Pizza(int id, String code, String nom, double prix) {
@@ -31,6 +37,7 @@ public class Pizza {
 
 	public Pizza(int id, String code, String nom, double prix, CategoriePizza categ) {
 		this(id, code, nom, prix);
+
 		nbPizzas++;
 		this.setCategPizza(categ);
 
@@ -87,6 +94,11 @@ public class Pizza {
 	@Override
 	public String toString() {
 		return code + "-> " + nom + " (" + prix + "€) Categorie : " + categPizza;
+	}
+
+	public String toStringFile() {
+
+		return getId() + ";" + getCode() + ";" + getNom() + ";" + getPrix() + ";" + getCategPizza() + ";";
 	}
 
 }
