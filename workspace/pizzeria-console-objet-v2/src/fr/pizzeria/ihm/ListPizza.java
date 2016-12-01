@@ -17,7 +17,7 @@ public class ListPizza extends Option {
 	}
 
 	@Override
-	public void executeOption() throws IOException {
+	public void executeOption() throws IOException, InstantiationException, IllegalAccessException {
 		ihmUtil.getPizzaDao().findAllPizzas();
 		// List<Pizza> pizzas = ihmUtil.getPizzaDao().findAllPizzas();
 

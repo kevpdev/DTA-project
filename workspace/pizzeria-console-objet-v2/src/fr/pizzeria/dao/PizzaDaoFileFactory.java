@@ -24,7 +24,7 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 	private Properties prop;
 
 	@Override
-	public List<Pizza> findAllPizzas() throws IOException {
+	public List<Pizza> findAllPizzas() throws IOException, InstantiationException, IllegalAccessException {
 		List<Pizza> pizzas = new ArrayList<Pizza>();
 		File f = new File(folderPath);
 		ArrayList<String> files = new ArrayList<String>(Arrays.asList(f.list()));
@@ -35,6 +35,7 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 			InputStream input = new FileInputStream(path);
 			// Field[] champs = Pizza.class.getDeclaredFields();
 			List<Field> champs = new ArrayList<>(Arrays.asList(Pizza.class.getDeclaredFields()));
+			Pizza pizza = Pizza.class.newInstance();
 			// System.out.println(input + " prop : " + prop);
 			getProp().load(input);
 			Set<Object> set = prop.keySet();
@@ -49,19 +50,19 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 						.orElse(null);
 				field.setAccessible(true);
 				System.out.println("field name : " + field.getName());
+				System.out.println("value key : " + getProp().get(value));
 				if (field != null) {
+
 					try {
+
 						// Pizza pizza = new Pizza();
-						field.set(Pizza.class.newInstance(), value);
+						field.set(pizza, getProp().get(value));
 						// System.out.println("prop : " + getProp().get(field));
 
 					} catch (IllegalArgumentException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (InstantiationException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

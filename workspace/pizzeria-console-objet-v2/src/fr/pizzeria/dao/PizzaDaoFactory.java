@@ -9,7 +9,7 @@ import fr.pizzeria.model.Pizza;
 
 public interface PizzaDaoFactory {
 
-	List<Pizza> findAllPizzas() throws IOException;
+	List<Pizza> findAllPizzas() throws IOException, InstantiationException, IllegalAccessException;
 
 	boolean addPizza(Pizza pizza)
 			throws PizzaException, FileNotFoundException, IllegalArgumentException, IllegalAccessException, IOException;

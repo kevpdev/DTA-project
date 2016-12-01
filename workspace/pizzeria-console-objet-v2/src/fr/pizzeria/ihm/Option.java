@@ -17,8 +17,8 @@ public abstract class Option {
 		this.libelle = libelle;
 	}
 
-	public abstract void executeOption()
-			throws PizzaException, FileNotFoundException, IOException, IllegalArgumentException, IllegalAccessException;
+	public abstract void executeOption() throws PizzaException, FileNotFoundException, IOException,
+			IllegalArgumentException, IllegalAccessException, InstantiationException;
 
 	public abstract void libelleOption();
 

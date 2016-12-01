@@ -16,7 +16,7 @@ public class DeletePizza extends Option {
 	}
 
 	@Override
-	public void executeOption() throws IOException {
+	public void executeOption() throws IOException, InstantiationException, IllegalAccessException {
 		ListPizza listp = new ListPizza(ihmUtil);
 		listp.executeOption();
 
