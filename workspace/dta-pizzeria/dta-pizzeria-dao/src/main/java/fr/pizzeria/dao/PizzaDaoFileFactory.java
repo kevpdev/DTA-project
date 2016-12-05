@@ -21,14 +21,16 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoFileFactory implements PizzaDaoFactory {
 
 	// private List<Pizza> pizzas = new ArrayList<Pizza>();
-	private String folderPath = "KEB.properties";
+	private String folderPath = "data/pizza/";
 	private Properties prop;
 
 	@Override
 	public List<Pizza> findAllPizzas() throws IOException, InstantiationException, IllegalAccessException {
 		List<Pizza> pizzas = new ArrayList<Pizza>();
-		File f = new File(folderPath);
-		System.out.println("f : " + f);
+		ClassLoader classLoader = this.getClass().getClassLoader();  
+		File f = new File(folderPath);  
+		System.out.println(f.list());
+		System.out.println(null == f ? f.getPath() : "null");
 		ArrayList<String> files = new ArrayList<String>(Arrays.asList(f.list()));
 		files.forEach(System.out::println);
 
@@ -56,29 +58,33 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 						.orElse(null);
 				field.setAccessible(true);
 
-				try {
-					System.out.println("value of : "
-							+ field.getType().getDeclaredMethod("valueOf").invoke(null, getProp().get(value)));
-				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
-						| NoSuchMethodException | SecurityException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				System.out.println("field name : " + field.getName());
-				System.out.println("value key : " + getProp().get(value));
+				
 				if (field != null) {
 
 					try {
-
+						
+						Object obj = field.getType().getDeclaredMethod("valueOf", (field.getType().isAssignableFrom(String.class) ? Object.class : String.class)).invoke(null, getProp().get(value.toString()));
+							System.out.println("field name : " + field.getName());
+							System.out.println("value key : " + getProp().get(value));
+							System.out.println("value of : "+ obj+ "type : "+obj.getClass());
 						// Pizza pizza = new Pizza();
-						field.set(pizza, getProp().get(value));
+						//	field.set(pizza, getProp().get(value));
+						field.set(pizza, (obj instanceof String ? getProp().get(value) : obj));
 						// System.out.println("prop : " + getProp().get(field));
 
 					} catch (IllegalArgumentException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (IllegalAccessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NoSuchMethodException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (SecurityException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
