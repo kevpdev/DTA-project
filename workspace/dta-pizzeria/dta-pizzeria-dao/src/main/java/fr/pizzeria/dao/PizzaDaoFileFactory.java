@@ -21,13 +21,14 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoFileFactory implements PizzaDaoFactory {
 
 	// private List<Pizza> pizzas = new ArrayList<Pizza>();
-	private String folderPath = "res/pizza/";
+	private String folderPath = "KEB.properties";
 	private Properties prop;
 
 	@Override
 	public List<Pizza> findAllPizzas() throws IOException, InstantiationException, IllegalAccessException {
 		List<Pizza> pizzas = new ArrayList<Pizza>();
 		File f = new File(folderPath);
+		System.out.println("f : " + f);
 		ArrayList<String> files = new ArrayList<String>(Arrays.asList(f.list()));
 		files.forEach(System.out::println);
 
@@ -39,7 +40,7 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 			Pizza pizza = Pizza.class.newInstance();
 			// System.out.println(input + " prop : " + prop);
 
-			// chargement des données du fichier
+			// chargement des donnï¿½es du fichier
 			getProp().load(input);
 
 			// list des valeurs des champs de la classe pizza
