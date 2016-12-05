@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,6 +54,16 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 				Field field = fields.stream().filter(a -> a.getName().equals(value.toString())).findFirst()
 						.orElse(null);
 				field.setAccessible(true);
+
+				try {
+					System.out.println("value of : "
+							+ field.getType().getDeclaredMethod("valueOf").invoke(null, getProp().get(value)));
+				} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
+						| NoSuchMethodException | SecurityException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 				System.out.println("field name : " + field.getName());
 				System.out.println("value key : " + getProp().get(value));
 				if (field != null) {

@@ -6,13 +6,13 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class Pizza {
 
 	@ToString
-	private int id;
+	private Integer id;
 	@ToString
 	private String code;
 	@ToString
 	private String nom;
 	@ToString
-	private double prix;
+	private Double prix;
 	@ToString
 	private CategoriePizza categPizza;
 	public static int nbPizzas;
@@ -46,7 +46,7 @@ public class Pizza {
 
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -70,7 +70,7 @@ public class Pizza {
 		this.nom = nom;
 	}
 
-	public double getPrix() {
+	public Double getPrix() {
 		return prix;
 	}
 
