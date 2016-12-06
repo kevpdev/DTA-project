@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,22 +37,15 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 		for (String filePath : files) {
 			String path = folderPath + filePath;
 			InputStream input = new FileInputStream(path);
-			// Field[] champs = Pizza.class.getDeclaredFields();
 			List<Field> fields = new ArrayList<>(Arrays.asList(Pizza.class.getDeclaredFields()));
 			Pizza pizza = Pizza.class.newInstance();
-			// System.out.println(input + " prop : " + prop);
-
 			// chargement des donn�es du fichier
 			getProp().load(input);
 
 			// list des valeurs des champs de la classe pizza
 			Set<Object> keys = getProp().keySet();
-			List<Object> listval = new ArrayList<>(Arrays.asList(getProp().values().toArray()));
-			// set.forEach(System.out::println);
-
-			fields.forEach(v -> {
-				System.out.println(v.getName());
-			});
+			// List<Object> listval = new
+			// ArrayList<>(Arrays.asList(getProp().values().toArray()));
 
 			for (Object key : keys) {
 
@@ -59,24 +53,25 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 				if (field != null) {
 					field.setAccessible(true);
 
-					System.out.println("getclass : " + field.getType());
 					Object valeur = null;
 					try {
-						valeur = field.getType().getDeclaredMethod("valueOf",
-								(field.getType().isAssignableFrom(String.class) ? Object.class : String.class));
-
 						if (field.getType().isEnum()) {
 							valeur = getProp().get(key).toString().toUpperCase();
-							field.set(pizza, valeur);
+							// field.set(pizza, valeur);
 						} else {
 							valeur = getProp().get(key).toString();
-							field.set(pizza, valeur);
+							// field.set(pizza, valeur);
 						}
-						System.out.println("field name : " + field.getName());
-						System.out.println("value key : " + getProp().get(key));
-						System.out.println("value of : " + valeur + " type : " + valeur.getClass());
 
-					} catch (NoSuchMethodException | SecurityException e) {
+						valeur = field.getType()
+								.getDeclaredMethod("valueOf",
+										(field.getType().isAssignableFrom(String.class) ? Object.class : String.class))
+								.invoke(null, valeur);
+
+						field.set(pizza, valeur);
+
+					} catch (NoSuchMethodException | SecurityException | IllegalArgumentException
+							| InvocationTargetException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
