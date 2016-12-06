@@ -49,9 +49,9 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 			List<Object> listval = new ArrayList<>(Arrays.asList(getProp().values().toArray()));
 			// set.forEach(System.out::println);
 
-			// fields.forEach(v -> {
-			// System.out.println(v.getName());
-			// });
+			fields.forEach(v -> {
+				System.out.println(v.getName());
+			});
 
 			for (Object key : keys) {
 
@@ -59,12 +59,13 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 				if (field != null) {
 					field.setAccessible(true);
 
+					System.out.println("getclass : " + field.getType());
 					Object valeur = null;
 					try {
 						valeur = field.getType().getDeclaredMethod("valueOf",
 								(field.getType().isAssignableFrom(String.class) ? Object.class : String.class));
 
-						if (field.getClass().isEnum()) {
+						if (field.getType().isEnum()) {
 							valeur = getProp().get(key).toString().toUpperCase();
 							field.set(pizza, valeur);
 						} else {
