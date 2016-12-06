@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,8 +26,8 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 	@Override
 	public List<Pizza> findAllPizzas() throws IOException, InstantiationException, IllegalAccessException {
 		List<Pizza> pizzas = new ArrayList<Pizza>();
-		ClassLoader classLoader = this.getClass().getClassLoader();  
-		File f = new File(folderPath);  
+		ClassLoader classLoader = this.getClass().getClassLoader();
+		File f = new File(folderPath);
 		System.out.println(f.list());
 		System.out.println(null == f ? f.getPath() : "null");
 		ArrayList<String> files = new ArrayList<String>(Arrays.asList(f.list()));
@@ -46,51 +45,93 @@ public class PizzaDaoFileFactory implements PizzaDaoFactory {
 			getProp().load(input);
 
 			// list des valeurs des champs de la classe pizza
-			Set<Object> fieldValues = prop.keySet();
+			Set<Object> keys = getProp().keySet();
+			List<Object> listval = new ArrayList<>(Arrays.asList(getProp().values().toArray()));
 			// set.forEach(System.out::println);
 
-			fields.forEach(v -> {
-				System.out.println(v.getName());
-			});
-			fieldValues.forEach(value -> {
+			// fields.forEach(v -> {
+			// System.out.println(v.getName());
+			// });
 
-				Field field = fields.stream().filter(a -> a.getName().equals(value.toString())).findFirst()
-						.orElse(null);
-				field.setAccessible(true);
+			for (Object key : keys) {
 
-				
+				Field field = fields.stream().filter(a -> a.getName().equals(key.toString())).findFirst().orElse(null);
 				if (field != null) {
+					field.setAccessible(true);
 
+					Object valeur = null;
 					try {
-						
-						Object obj = field.getType().getDeclaredMethod("valueOf", (field.getType().isAssignableFrom(String.class) ? Object.class : String.class)).invoke(null, getProp().get(value.toString()));
-							System.out.println("field name : " + field.getName());
-							System.out.println("value key : " + getProp().get(value));
-							System.out.println("value of : "+ obj+ "type : "+obj.getClass());
-						// Pizza pizza = new Pizza();
-						//	field.set(pizza, getProp().get(value));
-						field.set(pizza, (obj instanceof String ? getProp().get(value) : obj));
-						// System.out.println("prop : " + getProp().get(field));
+						valeur = field.getType().getDeclaredMethod("valueOf",
+								(field.getType().isAssignableFrom(String.class) ? Object.class : String.class));
 
-					} catch (IllegalArgumentException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (InvocationTargetException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (NoSuchMethodException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (SecurityException e) {
+						if (field.getClass().isEnum()) {
+							valeur = getProp().get(key).toString().toUpperCase();
+							field.set(pizza, valeur);
+						} else {
+							valeur = getProp().get(key).toString();
+							field.set(pizza, valeur);
+						}
+						System.out.println("field name : " + field.getName());
+						System.out.println("value key : " + getProp().get(key));
+						System.out.println("value of : " + valeur + " type : " + valeur.getClass());
+
+					} catch (NoSuchMethodException | SecurityException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+
 				}
 
-			});
+			}
+
+			System.out.println(pizza);
+
+			// keys.forEach(value -> {
+			//
+			// Field field = fields.stream().filter(a ->
+			// a.getName().equals(value.toString())).findFirst()
+			// .orElse(null);
+			// field.setAccessible(true);
+			//
+			// if (field != null) {
+			//
+			// try {
+			//
+			// Object obj = field.getType()
+			// .getDeclaredMethod("valueOf",
+			// (field.getType().isAssignableFrom(String.class) ? Object.class :
+			// String.class))
+			// .invoke(null, getProp().get(value.toString()));
+			// System.out.println("field name : " + field.getName());
+			// System.out.println("value key : " + getProp().get(value));
+			// System.out.println("value of : " + obj + " type : " +
+			// obj.getClass());
+			// // Pizza pizza = new Pizza();
+			// // field.set(pizza, getProp().get(value));
+			//
+			// field.set(pizza, (obj instanceof String ? getProp().get(value) :
+			// obj));
+			// // System.out.println("prop : " + getProp().get(field));
+			//
+			// } catch (IllegalArgumentException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// } catch (IllegalAccessException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// } catch (InvocationTargetException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// } catch (NoSuchMethodException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// } catch (SecurityException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
+			// }
+			//
+			// });
 			// Field fi = null;
 			// for (Object object : set) {
 			//
