@@ -1,8 +1,5 @@
 package fr.pizzeria.ihm;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -26,10 +23,6 @@ public class Ecran {
 		System.out.println("p1=p2 ? " + p1.equals(p2));
 
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
-		File file = new File("data/pizza/");
-		System.out.println("file : "+file.exists());
-		ArrayList<String> files = new ArrayList<String>(Arrays.asList(file.list()));
-		System.out.println("file : "+files.size());
 		String daoImpl = bundle.getString("dao.impl");
 		PizzaDaoFactory daofactory = (PizzaDaoFactory) Class.forName(daoImpl).newInstance();
 
